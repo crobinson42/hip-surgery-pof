@@ -1,28 +1,39 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
-// import { withRouter } from 'react-router-dom'
-import { withContext } from 'recompose'
-import Camera from './Camera'
+import PropTypes from 'prop-types'
+import Camera from './containers/Camera'
+import ImageContainer from './containers/ImageContainer'
 
 class App extends Component {
-  static propTypes = {}
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      imageUrl: '',
+      takePicture: true,
+    }
+  }
+
+  static childContextTypes = {
+    getImageUrl: PropTypes.string,
+    setImageUrl: PropTypes.func,
+    takePicture: PropTypes.func,
+  }
+
+  getChildContext = () => ({
+    getImageUrl: this.state.imageUrl,
+    setImageUrl: imageUrl => this.setState({ imageUrl, takePicture: false, }),
+    takePicture: (takePicture = true) => this.setState({ takePicture, })
+  })
 
   render () {
-    return (
-      <Camera />
-    )
+    if (this.state.takePicture)
+      return (
+        <Camera />
+      )
+
+    return <ImageContainer />
   }
 }
 
-const enhance = withContext(
-  childContextTypes = {
-    image: PropTypes.string, // URL string object
-  },
-  getChildContext = props => ({
-    image //todo: where is the top level context state going to live?
-  }),
-)
-
-export default enhance(App)
+export default App
 

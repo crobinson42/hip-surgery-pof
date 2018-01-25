@@ -1,0 +1,14 @@
+.user-controls-container {
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.user-controls-backdrop {
+  background-color: black;
+  height: 100%;
+  opacity: .5;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
