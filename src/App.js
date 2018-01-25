@@ -1,66 +1,28 @@
-import React, { Component } from 'react';
-import Camera from 'react-camera';
+import React, { Component } from 'react'
+// import PropTypes from 'prop-types'
+// import { connect } from 'react-redux'
+// import { withRouter } from 'react-router-dom'
+import { withContext } from 'recompose'
+import Camera from './Camera'
 
-export default class App extends Component {
+class App extends Component {
+  static propTypes = {}
 
-  constructor(props) {
-    super(props);
-    this.takePicture = this.takePicture.bind(this);
-  }
-
-  takePicture() {
-    this.camera.capture()
-      .then(blob => {
-        this.img.src = URL.createObjectURL(blob);
-        this.img.onload = () => { URL.revokeObjectURL(this.src); }
-      })
-  }
-
-  render() {
+  render () {
     return (
-      <div style={style.container}>
-        <Camera
-          style={style.preview}
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-        >
-          <div style={style.captureContainer} onClick={this.takePicture}>
-            <div style={style.captureButton} />
-          </div>
-        </Camera>
-        <img
-          style={style.captureImage}
-          ref={(img) => {
-            this.img = img;
-          }}
-        />
-      </div>
-    );
+      <Camera />
+    )
   }
 }
 
-const style = {
-  preview: {
-    position: 'relative',
+const enhance = withContext(
+  childContextTypes = {
+    image: PropTypes.string, // URL string object
   },
-  captureContainer: {
-    display: 'flex',
-    position: 'absolute',
-    justifyContent: 'center',
-    zIndex: 1,
-    bottom: 0,
-    width: '100%'
-  },
-  captureButton: {
-    backgroundColor: '#fff',
-    borderRadius: '50%',
-    height: 56,
-    width: 56,
-    color: '#000',
-    margin: 20
-  },
-  captureImage: {
-    width: '100%',
-  }
-};
+  getChildContext = props => ({
+    image //todo: where is the top level context state going to live?
+  }),
+)
+
+export default enhance(App)
+
