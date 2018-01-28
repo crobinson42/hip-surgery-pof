@@ -1,12 +1,16 @@
 import React from 'react'
-import './AngleInputModal'
+import PropTypes from 'prop-types'
+import { getContext } from 'recompose'
+import AngleChangeInputModal from './AngleChangeInputModal'
 
-const AngleInputs = () => (
+const AngleInputs = ({ inklinationAngle }) => (
   <div className="text-info py-2">
-    <span className="lead px-3">Inklination Angle: 45°</span>
+    <AngleChangeInputModal />
 
-    <button className="btn btn-sm btn-outline-light">Set Angle</button>
+    <span className="lead px-3">Inklination Angle: {inklinationAngle}°</span>
+
+    <button className="btn btn-sm btn-outline-light" data-toggle="modal" data-target="#inklinationModal">Set Angle</button>
   </div>
 )
 
-export default AngleInputs
+export default getContext({ inklinationAngle: PropTypes.number })(AngleInputs)
