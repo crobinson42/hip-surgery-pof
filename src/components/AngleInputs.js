@@ -1,4 +1,5 @@
 import React from 'react'
+import './AngleInputModal'
 
 const AngleInputs = () => (
   <div className="text-info py-2">
