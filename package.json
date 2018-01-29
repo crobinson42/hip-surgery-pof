@@ -11,6 +11,7 @@
     "react-webcam": "^0.2.0",
     "recompose": "^0.26.0"
   },
+  "homepage": "https://crobinson42.github.io/hip-surgery-pof",
   "scripts": {
     "deploy" : "react-scripts build && gh-pages -d build",
     "start": "HTTPS=true react-scripts start",
