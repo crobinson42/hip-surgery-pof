@@ -12,7 +12,7 @@ const UserControls = ({ invertImage, retakeHandler }) => (
         <button className="btn btn-lg btn-outline-info" onClick={retakeHandler}>
           <i className="fa fa-camera"></i> Retake
         </button>
-
+        {' '}
         <button className="btn btn-lg btn-info" onClick={invertImage}>
           <i className="fa fa-image"></i> Invert
         </button>

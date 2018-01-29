@@ -1,3 +1,5 @@
+* {cursor: pointer;}
+
 .modal-backdrop.show {
   z-index: -1;
 }
